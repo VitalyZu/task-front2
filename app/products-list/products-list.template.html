@@ -1,0 +1,82 @@
+<input class='search-input' type="text" ng-model='query'>
+<div id="products_section" ng-repeat='product in data | filter: query track by $index' ng-init='unitprice=true;randnum=getRandom(product.unitAlt)'>
+    <div class="products_page pg_0">
+        <div class="product product_horizontal">                                
+            <span class="product_code">Код: {{product.code | codeFormat}}</span>
+            <div class="product_status_tooltip_container">
+                <span class="product_status">Наличие</span>
+            </div>                                
+            <div class="product_photo">
+                <a href="#" class="url--link product__link">
+                    <img ng-src='{{product.primaryImageUrl | imgPath}}'>
+                </a>                                    
+            </div>
+            <div class="product_description">
+                <a href="#" class="product__link">{{product.title}}</a>
+            </div>
+            <div class="product_tags hidden-sm">
+                <p>Могут понадобиться:</p>
+                <a href="#" class="url--link" ng-repeat='assoc in product.assocProducts | assocFormat track by $index' >{{assoc}}</a>
+            </div>
+            <div class="product_units" ng-init='select = {unit: "m"}' >
+                <div class="unit--wrapper">
+                    <div class="unit--select" ng-class="{'unit--active' : select.unit === 'm'}" ng-click='select.unit = "m"; unitprice = true'>
+                        <p class="ng-binding">За <span ng-hide='product.unit === product.unitAlt'>{{product.unitAlt | unitForm}}</span><span ng-hide='!(product.unit === product.unitAlt)'>{{product.unitFullAlt | unitForm}}</span></p>
+                    </div>
+                    <div class="unit--select" ng-class="{'unit--active' : select.unit === 'y'}" ng-click='select.unit = "y"; unitprice = false' ng-hide='product.unit === product.unitAlt'>
+                        <p class="ng-binding">За {{product.unitFull | unitForm}}</p>
+                    </div>
+                </div>
+            </div>
+            <p class="product_price_club_card">
+                <span class="product_price_club_card_text">По карте<br>клуба</span>
+                <span class="goldPrice" ng-hide='!unitprice'>{{product.priceGoldAlt | priceFormat}}</span>
+                <span class="goldPrice" ng-hide='unitprice'>{{product.priceGold | priceFormat}}</span>
+                <span class="rouble__i black__i">
+                    <svg version="1.0" id="rouble__b" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="30px" height="22px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+                       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#rouble_black"></use>
+                    </svg>
+                 </span>
+            </p>
+            <p class="product_price_default">
+                <span class="retailPrice" ng-hide='!unitprice'>{{product.priceRetailAlt | priceFormat}}</span>
+                <span class="retailPrice" ng-hide='unitprice'>{{product.priceRetail | priceFormat}}</span>
+                <span class="rouble__i black__i">
+                    <svg version="1.0" id="rouble__g" xmlns="http://www.w3.org/2000/svg" x="0" y="0" width="30px" height="22px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+                       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#rouble_gray"></use>
+                    </svg>
+                 </span>
+            </p>
+            <div class="product_price_points">
+                <p class="ng-binding">Можно купить за {{product.priceRetailAlt*0.9 | priceFormat}} балла</p>
+            </div>
+            <div class="list--unit-padd"></div>
+            <div class="list--unit-desc" ng-hide='product.unit === product.unitAlt'>
+                <div class="unit--info">
+                    <div class="unit--desc-i"></div>
+                    <div class="unit--desc-t">
+                        <p>
+                            <span class="ng-binding">Продается {{product.unitFull | unitInfoForm}}:</span>
+                            <span class="unit--infoInn">1 {{product.unit}} = {{randnum}} {{product.unitAlt}} </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="product__wrapper">
+                <div class="product_count_wrapper">
+                    <div class="stepper">
+                        <input class="product__count stepper-input" type="text" ng-model="amount" name='amountInput'>
+                        <span class="stepper-arrow up" ng-click='upHandler($index)'></span>
+                        <span class="stepper-arrow down" ng-click='downHandler($index)'></span>                                            
+                    </div>
+                </div>
+                <span class="btn btn_cart" data-url="/cart/" data-product-id="{{product.productId}}">
+                    <svg class="ic ic_cart">
+                       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart"></use>
+                    </svg>
+                    <span class="ng-binding">В корзину</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
