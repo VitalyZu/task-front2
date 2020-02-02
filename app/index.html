@@ -9,11 +9,12 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="misc/libs-8d0dd6b566.min.css">
     <link rel="stylesheet" type="text/css" href="misc/bundle-1732f80f0a.min.css">
-    <link rel="stylesheet" href="misc/css/style.css">
+    <link rel="stylesheet" type="text/css" href="misc/css/style.css">
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular-route/angular-route.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
     <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
     <script src="core/core.module.js"></script>
     <script src="core/imgPath.filter.js"></script>
     <script src="core/onPage.filetr.js"></script>
@@ -25,10 +26,12 @@
     <script src="core/unitForm.filter.js"></script>
     <script src="products-list/products-list.module.js"></script>
     <script src="products-list/products-list.component.js"></script>
+    <script src="cart-list/cart-list.module.js"></script>
+    <script src="cart-list/cart-list.component.js"></script>
 </head>
 
 <body>
-    <products-list></products-list>
+    <div ng-view></div>
 
     <svg viewBox="0 0 497 415" xmlns="http://www.w3.org/2000/svg" display="none">
         <symbol id="rouble_black">

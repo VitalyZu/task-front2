@@ -4,6 +4,12 @@
 </div>
 <div class='search fixed'>
     <input class='search-input' type="text" ng-model='query' placeholder="Поиск..." ng-change='inputHandle()'>
+    <button ng-click="goCart()" class='btn-cart'>
+        <svg class="ic ic_cart">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart"></use>
+         </svg>
+        КОРЗИНА({{$root.list.length}})
+    </button>
 </div>
 <div class='product-wrap'>
 <div class="products_section" ng-repeat='product in data | onPage: query: page track by $index' ng-init='unitprice=true;randnum=getRandom(product.unitAlt)'>
@@ -77,7 +83,7 @@
                         <span class="stepper-arrow down" ng-click='downHandler($index,product.code | codeFormat)'></span>                                            
                     </div>
                 </div>
-                <span class="btn btn_cart" data-url="/cart/" data-product-id="{{product.productId}}">
+                <span class="btn btn_cart" data-url="/cart/" data-product-id="{{product.productId}}" ng-click='toCart(product.code,$index)'>
                     <svg class="ic ic_cart">
                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart"></use>
                     </svg>

@@ -1,0 +1,13 @@
+<div ng-hide='(!!list[0])'>Корзина пуста</div>
+<div class='list-prod-wrap'>
+    <ol>
+        <li ng-repeat='prod in list track by $index' class='list-product'>
+            <div>Наименование: {{prod.title}}</div>
+            <div>Количество: {{prod.count}}</div>
+            <div>Цена: {{prod.priceRetail*prod.count}}</div>
+            <button ng-click='delProd($index)'>Удалить</button>
+        </li>
+    </ol>
+</div>
+
+<a href="#!/products">Назад</a>
