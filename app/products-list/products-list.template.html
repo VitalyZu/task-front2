@@ -1,5 +1,12 @@
-<input class='search-input' type="text" ng-model='query'>
-<div id="products_section" ng-repeat='product in data | filter: query track by $index' ng-init='unitprice=true;randnum=getRandom(product.unitAlt)'>
+<div class='loading' ng-hide='isLoad'>
+    Loading
+    <img src="misc/images/91.gif" alt="load">
+</div>
+<div class='search fixed'>
+    <input class='search-input' type="text" ng-model='query' placeholder="Поиск..." ng-change='inputHandle()'>
+</div>
+<div class='product-wrap'>
+<div class="products_section" ng-repeat='product in data | onPage: query: page track by $index' ng-init='unitprice=true;randnum=getRandom(product.unitAlt)'>
     <div class="products_page pg_0">
         <div class="product product_horizontal">                                
             <span class="product_code">Код: {{product.code | codeFormat}}</span>
@@ -65,9 +72,9 @@
             <div class="product__wrapper">
                 <div class="product_count_wrapper">
                     <div class="stepper">
-                        <input class="product__count stepper-input" type="text" ng-model="amount" name='amountInput'>
-                        <span class="stepper-arrow up" ng-click='upHandler($index)'></span>
-                        <span class="stepper-arrow down" ng-click='downHandler($index)'></span>                                            
+                        <input class="product__count stepper-input" type="text" value="{{productAmount[(product.code | codeFormat)]?productAmount[(product.code | codeFormat)]:1}}">
+                        <span class="stepper-arrow up" ng-click='upHandler($index,product.code | codeFormat)'></span>
+                        <span class="stepper-arrow down" ng-click='downHandler($index,product.code | codeFormat)'></span>                                            
                     </div>
                 </div>
                 <span class="btn btn_cart" data-url="/cart/" data-product-id="{{product.productId}}">
@@ -79,4 +86,13 @@
             </div>
         </div>
     </div>
+</div>
+</div>
+<div ng-init='pages={name:page}' class='page'>
+    <button 
+        ng-repeat='button in _.range(((data | searchTitle:query).length)/10)'
+        ng-class="{'page-active': page === $index+1}"
+        ng-click='changePage(+$index);pages.name = page'>
+        {{$index+1}}
+    </button>
 </div>
