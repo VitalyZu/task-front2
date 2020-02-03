@@ -1,4 +1,4 @@
-# task-front2
+# task-front2 (angularjs)
 
 **Установка зависимостей**
 
