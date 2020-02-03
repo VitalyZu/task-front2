@@ -1,6 +1,6 @@
 # task-front2 (angularjs)
 
-**Установка зависимостей**
+**Install Dependencies**
 
 ```
 npm install
@@ -10,6 +10,10 @@ npm install
 
 ```
 npm start
+```
+или 
+```
+gulp default
 ```
 
 **products.json path**
