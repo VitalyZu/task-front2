@@ -1,5 +1,11 @@
 # task-front2
 
+**Установка зависимостей**
+
+```
+npm install
+```
+
 **Run the Application**
 
 ```
